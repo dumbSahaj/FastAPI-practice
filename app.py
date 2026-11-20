@@ -1,4 +1,4 @@
-from fastapi import FastAPI
+from fastapi import FastAPI,Request
 import products
 
 app = FastAPI()
@@ -29,3 +29,9 @@ def single_product(product_id:int):
 def questionans(name:str, age:int):
     return f"hi {age} ur age is {name}"
 
+## query params with request 
+@app.get("/greet")
+def greetuser(request:Request):
+    requested_dict = dict(request.query_params)
+    return f"hi {requested_dict.get('age')} fuck off {requested_dict.get('name')} "
+## usefull only we start models
