@@ -23,3 +23,9 @@ def single_product(product_id:int):
     return {
         product_id:"not found"
     }
+
+## query params without request
+@app.get("/query")
+def questionans(name:str, age:int):
+    return f"hi {age} ur age is {name}"
+
