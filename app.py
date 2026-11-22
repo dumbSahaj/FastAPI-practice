@@ -53,3 +53,14 @@ def updatestuff(body: ProductDTO, which_id: int):
             products.products[i] = new_product_details
             return {"message":"product updated success","products":products.products}
     return {"message":"gadbad"}
+
+## delete a product
+@app.delete("/delete/{which_id}")
+def deletepro(which_id:int):
+    for i,product in enumerate(products.products):
+        if product.get("sno") == which_id:
+            products.products.pop(i)
+            return {"message":"product deleted","products":products.products}
+    return {"message":"gadbad"}
+
+## crud operations done
