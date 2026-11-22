@@ -40,5 +40,16 @@ def greetuser(request:Request):
 ## post method
 @app.post("/createaproduct")
 def new_product(body:ProductDTO):
-    print(body)
-    return {"message":"new product created succesfully"}
+    dictbody = body.model_dump()
+    products.products.append(dictbody)
+    return {"message":"new product created succesfully","new data":products.products}
+
+## put method used to update 
+@app.put("/update_product/{which_id}")
+def updatestuff(body: ProductDTO, which_id: int):
+    new_product_details = body.model_dump()
+    for i,product in enumerate(products.products):
+        if product.get("sno") == which_id:
+            products.products[i] = new_product_details
+            return {"message":"product updated success","products":products.products}
+    return {"message":"gadbad"}
